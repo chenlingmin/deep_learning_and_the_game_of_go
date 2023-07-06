@@ -1,6 +1,9 @@
 from dlgo.gotypes import Point
 
 
+__all__ = [
+    'is_point_an_eye'
+]
 def is_point_an_eye(board, point, color):
     if board.get(point) is not None: # 眼必须是一个空点
         return False

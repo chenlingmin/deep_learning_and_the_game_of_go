@@ -2,12 +2,18 @@ import copy
 
 from dlgo.gotypes import Player
 
+__all__ = [
+    'Board',
+    'GameState',
+    'Move',
+]
+
 
 class GoString():  # 棋链是一系列同色且相连的棋子
     def __init__(self, color, stones, liberties):
         self.color = color
-        self.stones = stones
-        self.liberties = liberties
+        self.stones = set(stones)
+        self.liberties = set(liberties)
 
     def remove_liberty(self, point):
         self.liberties.remove(point)
@@ -36,7 +42,7 @@ class GoString():  # 棋链是一系列同色且相连的棋子
 
 
 class Board():  # 棋盘初始化魏一个空网络，其尺寸由行数和列数这两个参数决定
-    def __int__(self, num_rows, num_cols):
+    def __init__(self, num_rows, num_cols):
         self.num_rows = num_rows
         self.num_cols = num_cols
         self._grid = {}
@@ -137,7 +143,7 @@ class GameState():
     def new_game(cls, board_size):
         if isinstance(board_size, int):
             board_size = (board_size, board_size)
-        board = Board(board_size, board_size)
+        board = Board(*board_size)
         return GameState(board, Player.black, None, None)
 
     def is_move_self_capture(self, player, move):  # 是否自提

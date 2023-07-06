@@ -1,6 +1,11 @@
 import enum
 from collections import namedtuple
 
+__all__ = [
+    'Player',
+    'Point'
+]
+
 
 class Player(enum.Enum):
     black = 1

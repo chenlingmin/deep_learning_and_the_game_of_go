@@ -6,7 +6,7 @@ __all__ = [
 import enum
 import random
 
-from dlgo.agent.base import Agent
+from dlgo.agent import Agent
 
 
 class GameResult(enum.Enum):

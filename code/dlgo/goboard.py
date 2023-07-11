@@ -1,13 +1,15 @@
 import copy
 
 from dlgo import zobrist
-from dlgo.gotypes import Player
+from dlgo.gotypes import Player, Point
 
 __all__ = [
     'Board',
     'GameState',
     'Move',
 ]
+
+from dlgo.scoring import compute_game_result
 
 
 class GoString():  # 棋链是一系列同色且相连的棋子
@@ -210,3 +212,23 @@ class GameState():
         if second_last_move is None:
             return False
         return self.last_move.is_pass and second_last_move.is_pass
+
+    def legal_moves(self):
+        moves = []
+        for row in range(1, self.board.num_rows + 1):
+            for col in range(1, self.board.num_cols + 1):
+                move = Move.play(Point(row, col))
+                if self.is_valid_move(move):
+                    moves.append(move)
+
+        moves.append(Move.pass_trun())
+        moves.append(Move.resign())
+        return moves
+
+    def winner(self):
+        if not self.is_over():
+            return None
+        if self.last_move.is_resign:
+            return self.next_player
+        game_result = compute_game_result(self)
+        return game_result.winner

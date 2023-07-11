@@ -2,7 +2,7 @@ import time
 
 from dlgo import goboard, agent
 from dlgo import gotypes
-from dlgo.agent.naive import RandomBot
+from dlgo.agent import RandomBot
 from dlgo.utils import print_board, print_move, print_board_plus, point_from_coords
 
 

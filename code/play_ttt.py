@@ -1,5 +1,4 @@
-from dlgo import ttt, minimax
-from dlgo.minimax.minimax import MinimaxAgent
+from dlgo.minimax import MinimaxAgent
 from dlgo.ttt.ttttypes import Point
 from dlgo.ttt.ttttypes import Player
 from dlgo.ttt.tttboard import GameState, Move

@@ -116,7 +116,7 @@ class Move():  # 这里可以设置棋手在回合中所能采取的任一种动
         return Move(point=point)
 
     @classmethod
-    def pass_trun(cls):  # 这个动作是跳过回合
+    def pass_turn(cls):  # 这个动作是跳过回合
         return Move(is_pass=True)
 
     @classmethod

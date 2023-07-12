@@ -1,4 +1,5 @@
 __all__ = [
+    'AlphaBetaAgent'
 ]
 
 import random

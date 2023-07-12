@@ -1,6 +1,6 @@
 from dlgo.goboard import GameState, Move
 from dlgo.gotypes import Point, Player
-from dlgo.minimax.alphabeta import AlphaBetaAgent
+from dlgo.minimax import AlphaBetaAgent
 from dlgo.utils import print_board_plus, point_from_coords, print_move
 
 BOARD_SIZE = 5

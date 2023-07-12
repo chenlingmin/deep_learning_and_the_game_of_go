@@ -1,6 +1,6 @@
 from dlgo.goboard import GameState, Move
 from dlgo.gotypes import Point, Player
-from dlgo.minimax.depthprune import DepthPrunedAgent
+from dlgo.minimax import DepthPrunedAgent
 from dlgo.utils import print_board_plus, point_from_coords, print_move
 
 BOARD_SIZE = 5

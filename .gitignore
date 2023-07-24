@@ -1,1 +1,7 @@
 /.idea
+*.tar
+*.tar.gz
+*.npy
+kgs_index.html
+*.h5
+test_samples.py

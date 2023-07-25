@@ -30,7 +30,7 @@ def worker(jobinfo):
 
 
 class GoDataProcessor:
-    def __init__(self, encoder='oneplane', data_directory='data'):
+    def __init__(self, encoder='simple', data_directory='data'):
         self.encoder_string = encoder
         self.encoder = get_encoder_by_name(encoder, 19)
         self.data_dir = data_directory

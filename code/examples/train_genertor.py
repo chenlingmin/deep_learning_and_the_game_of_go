@@ -7,8 +7,10 @@ from keras.src.optimizers.optimizer_v1 import rmsprop
 
 from dlgo.data.parallel_processor import GoDataProcessor
 from dlgo.encoders.oneplane import OnePlaneEncoder
+from dlgo.encoders.sevenplane import SevenPlaneEncoder
+from dlgo.encoders.simple import SimpleEncoder
 
-from dlgo.networks import small
+from dlgo.networks import small, large
 # from keras.layers import S
 # from keras.models import Sequential
 # from keras.layers import Dense
@@ -24,7 +26,7 @@ def main():
     num_classes = go_board_rows * go_board_cols
     num_games = 1000
 
-    encoder = OnePlaneEncoder((go_board_rows, go_board_cols))  # <1>
+    encoder = SevenPlaneEncoder((go_board_rows, go_board_cols))  # <1>
 
     processor = GoDataProcessor(encoder=encoder.name())  # <2>
 
@@ -38,13 +40,12 @@ def main():
 
     # tag::train_generator_model[]
     input_shape = (encoder.num_planes, go_board_rows, go_board_cols)
-    network_layers = small.layers(input_shape)
+    network_layers = large.layers(input_shape)
     model = Sequential()
     for layer in network_layers:
         model.add(layer)
     model.add(Dense(num_classes, activation='softmax'))
-    optimizer =rmsprop(rho=0.7, decay=0.01)
-    model.compile(loss='categorical_crossentropy',   metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy',  metrics=['accuracy'])
     # end::train_generator_model[]
 
     # tag::train_generator_fit[]

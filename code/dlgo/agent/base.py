@@ -9,3 +9,6 @@ class Agent:
 
     def select_move(self, game_state):
         raise NotImplementedError()
+
+    def diagnostics(self):
+        return {}

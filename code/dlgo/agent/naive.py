@@ -23,5 +23,5 @@ class RandomBot(Agent):
                                             game_state.next_player):
                     candidates.append(candidate)
         if not candidates:
-            return Move.pass_trun()
+            return Move.pass_turn()
         return Move.play(random.choice(candidates))

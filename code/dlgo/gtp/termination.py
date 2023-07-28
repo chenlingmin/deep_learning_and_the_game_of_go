@@ -2,7 +2,12 @@ from dlgo.agent import Agent
 from dlgo.goboard_fast import Move
 from dlgo.scoring import compute_game_result
 
-
+__all__ = [
+    'TerminationStrategy',
+    'PassWhenOpponentPasses',
+    'ResignLargeMargin',
+    'get',
+]
 class TerminationStrategy:
     def __init__(self):
         pass

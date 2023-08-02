@@ -64,7 +64,7 @@ def evaluate_territory(board):
                     fill_with = 'dame'
                 for pos in group:
                     status[pos] = fill_with
-        return Territory(status)
+    return Territory(status)
 
 
 def _collect_region(start_pos, board, visited=None):

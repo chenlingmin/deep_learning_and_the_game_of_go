@@ -1,9 +1,25 @@
 import numpy as np
+from keras.src.optimizers import SGD
 
 from dlgo import kerasutil, encoders
 from dlgo.agent import Agent
 from dlgo.agent.helpers_fast import is_point_an_eye
 from dlgo.goboard_fast import Move
+
+
+def normalize(x):
+    total = np.sum(x)
+    return x / total
+
+
+def prepare_experience_data(experience, board_width, board_height):
+    experience_size = experience.actions.shape[0]
+    target_vectors = np.zeros((experience_size, board_width * board_height))
+    for i in range(experience_size):
+        action = experience.actions[i]
+        reward = experience.rewards[i]
+        target_vectors[i][action] = reward
+    return target_vectors
 
 
 class PolicyAgent(Agent):
@@ -60,6 +76,24 @@ class PolicyAgent(Agent):
         h5file['encoder'].attrs['board_height'] = self._encoder.board_height
         h5file.create_group('model')
         kerasutil.save_model_to_hdf5_group(self._model, h5file['model'])
+
+    def train(self, experience, lr, clipnorm, batch_size):
+        self._model.compile(
+            loss='categorical_crossentropy',
+            optimizer=SGD(lr=lr, clipnorm=clipnorm)
+        )
+
+        target_vectors = prepare_experience_data(
+            experience,
+            self._encoder.board_width,
+            self._encoder.board_height
+        )
+
+        self._model.fit(
+            experience.states, target_vectors,
+            batch_size=batch_size,
+            epochs=1
+        )
 
 
 def load_policy_agent(h5file):

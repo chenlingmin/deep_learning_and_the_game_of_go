@@ -7,6 +7,7 @@ from multiprocessing import freeze_support
 # tag::train_generator_imports[]
 from dlgo.data.parallel_processor import GoDataProcessor
 from dlgo.encoders.oneplane import OnePlaneEncoder
+from dlgo.encoders.simple import SimpleEncoder
 
 from dlgo.networks import small
 from keras.models import Sequential
@@ -23,7 +24,7 @@ def main():
     num_classes = go_board_rows * go_board_cols
     num_games = 1000
 
-    encoder = OnePlaneEncoder((go_board_rows, go_board_cols))  # <1>
+    encoder = SimpleEncoder((go_board_rows, go_board_cols))  # <1>
 
     processor = GoDataProcessor(encoder=encoder.name())  # <2>
 

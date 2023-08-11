@@ -26,7 +26,7 @@ def main():
     num_classes = go_board_rows * go_board_cols
     num_games = 1000
 
-    encoder = SevenPlaneEncoder((go_board_rows, go_board_cols))  # <1>
+    encoder = SimpleEncoder((go_board_rows, go_board_cols))  # <1>
 
     processor = GoDataProcessor(encoder=encoder.name())  # <2>
 
@@ -40,7 +40,7 @@ def main():
 
     # tag::train_generator_model[]
     input_shape = (encoder.num_planes, go_board_rows, go_board_cols)
-    network_layers = large.layers(input_shape)
+    network_layers = small.layers(input_shape)
     model = Sequential()
     for layer in network_layers:
         model.add(layer)
@@ -56,7 +56,7 @@ def main():
                         steps_per_epoch=generator.get_num_samples() / batch_size,  # <2>
                         validation_data=test_generator.generate(batch_size, num_classes),  # <3>
                         validation_steps=test_generator.get_num_samples() / batch_size,  # <4>
-                        # callbacks=[ModelCheckpoint('../checkpoints/small_model_epoch_{epoch}.h5')]
+                        callbacks=[ModelCheckpoint('../checkpoints/small_model_epoch_{epoch}.h5')]
               )  # <5>
 
     model.evaluate(test_generator.generate(batch_size, num_classes),

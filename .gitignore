@@ -4,5 +4,6 @@
 *.npy
 kgs_index.html
 *.h5
+*.hdf5
 *.sgf
 test_samples.py

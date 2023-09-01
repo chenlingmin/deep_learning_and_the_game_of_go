@@ -3,3 +3,4 @@
 # from dlgo.networks import leaky
 # from dlgo.networks import medium
 from dlgo.networks import small
+from dlgo.networks.alphago import *

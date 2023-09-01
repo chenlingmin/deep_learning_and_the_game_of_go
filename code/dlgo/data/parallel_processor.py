@@ -85,6 +85,9 @@ class GoDataProcessor:
                 raise ValueError(name + ' is not a valid sgf')
             sgf_content = zip_file.extractfile(name).read()
             sgf = Sgf_game.from_string(sgf_content)
+            if sgf.get_handicap() is not None and sgf.get_handicap() != 0:
+                print('skipping handicaped game ...')
+                continue
 
             game_state, first_move_done = self.get_handicap(sgf)
 

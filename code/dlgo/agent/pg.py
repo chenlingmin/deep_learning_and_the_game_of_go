@@ -29,6 +29,10 @@ class PolicyAgent(Agent):
         self._collector = None
         self._temperature = 0.0
 
+    def predict(self, game_state):
+        encoded_state = self._encoder.encode(game_state)
+        input_tensor = np.array([encoded_state])
+        return self._model.predict(input_tensor)[0]
     def set_temperature(self, temperature):
         self._temperature = temperature
 
@@ -77,7 +81,7 @@ class PolicyAgent(Agent):
         h5file.create_group('model')
         kerasutil.save_model_to_hdf5_group(self._model, h5file['model'])
 
-    def train(self, experience, lr, clipnorm, batch_size):
+    def train(self, experience, lr=0.0000001, clipnorm=1.0, batch_size=512):
         self._model.compile(
             loss='categorical_crossentropy',
             optimizer=SGD(lr=lr, clipnorm=clipnorm)

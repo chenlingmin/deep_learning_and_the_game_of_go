@@ -3,3 +3,4 @@ from .predict import *
 from .naive import *
 from .navie_fast import *
 from .pg import *
+from .alphago import *
